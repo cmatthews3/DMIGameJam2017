@@ -17,17 +17,48 @@ public class PlayerController : MonoBehaviour {
     {
         if (Input.GetKey(InputReferenceManager.instance.movement.up))
         {
-            transform.position += transform.up * speed;
+            transform.position += Vector3.up * speed;
             transform.eulerAngles = Vector3.zero;
         }
         if (Input.GetKey(InputReferenceManager.instance.movement.down))
         {
-            transform.position -= transform.up * speed;
+            transform.position += -Vector3.up * speed;
             transform.eulerAngles = new Vector3(0,0,180);
         }
-        else
+        if (Input.GetKey(InputReferenceManager.instance.movement.left))
         {
-            body.velocity = Vector3.zero;
+            transform.position += -Vector3.right * speed;
+            transform.eulerAngles = new Vector3(0, 0, 90);
         }
+        if (Input.GetKey(InputReferenceManager.instance.movement.right))
+        {
+            transform.position += Vector3.right * speed;
+            transform.eulerAngles = new Vector3(0, 0, 270);
+        }
+
+        if(Input.GetKey(InputReferenceManager.instance.movement.up) & Input.GetKey(InputReferenceManager.instance.movement.right))
+        {
+            transform.eulerAngles = new Vector3(0, 0, 315);
+
+        }
+
+        if (Input.GetKey(InputReferenceManager.instance.movement.down) & Input.GetKey(InputReferenceManager.instance.movement.right))
+        {
+            transform.eulerAngles = new Vector3(0, 0, 225);
+
+        }
+
+        if (Input.GetKey(InputReferenceManager.instance.movement.down) & Input.GetKey(InputReferenceManager.instance.movement.left))
+        {
+            transform.eulerAngles = new Vector3(0, 0, 135);
+
+        }
+
+        if (Input.GetKey(InputReferenceManager.instance.movement.up) & Input.GetKey(InputReferenceManager.instance.movement.left))
+        {
+            transform.eulerAngles = new Vector3(0, 0, 45);
+
+        }
+
     }
 }
