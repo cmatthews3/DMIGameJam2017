@@ -1,6 +1,6 @@
 .DS_Store
 
-Assets/_*
+
 build/*
 builds/*
 capture/*
