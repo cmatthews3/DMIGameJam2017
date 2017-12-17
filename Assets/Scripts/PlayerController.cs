@@ -15,50 +15,32 @@ public class PlayerController : MonoBehaviour {
 
     private void Update()
     {
+        float moveVert = 0;
+        float moveHorizontal = 0;
+
         if (Input.GetKey(InputReferenceManager.instance.movement.up))
         {
-            transform.position += Vector3.up * speed;
-            transform.eulerAngles = Vector3.zero;
+            moveVert += 1;
+            
         }
         if (Input.GetKey(InputReferenceManager.instance.movement.down))
         {
-            transform.position += -Vector3.up * speed;
-            transform.eulerAngles = new Vector3(0,0,180);
+            moveVert -= 1;
         }
         if (Input.GetKey(InputReferenceManager.instance.movement.left))
         {
-            transform.position += -Vector3.right * speed;
-            transform.eulerAngles = new Vector3(0, 0, 90);
+            moveHorizontal -= 1;
         }
         if (Input.GetKey(InputReferenceManager.instance.movement.right))
         {
-            transform.position += Vector3.right * speed;
-            transform.eulerAngles = new Vector3(0, 0, 270);
+            moveHorizontal += 1;
         }
 
-        if(Input.GetKey(InputReferenceManager.instance.movement.up) & Input.GetKey(InputReferenceManager.instance.movement.right))
-        {
-            transform.eulerAngles = new Vector3(0, 0, 315);
 
-        }
+        Vector3 heading = new Vector3(moveHorizontal, moveVert, 0).normalized;
 
-        if (Input.GetKey(InputReferenceManager.instance.movement.down) & Input.GetKey(InputReferenceManager.instance.movement.right))
-        {
-            transform.eulerAngles = new Vector3(0, 0, 225);
+        transform.rotation = Quaternion.LookRotation(heading, Vector3.right);
 
-        }
-
-        if (Input.GetKey(InputReferenceManager.instance.movement.down) & Input.GetKey(InputReferenceManager.instance.movement.left))
-        {
-            transform.eulerAngles = new Vector3(0, 0, 135);
-
-        }
-
-        if (Input.GetKey(InputReferenceManager.instance.movement.up) & Input.GetKey(InputReferenceManager.instance.movement.left))
-        {
-            transform.eulerAngles = new Vector3(0, 0, 45);
-
-        }
-
+        body.velocity = heading * speed;
     }
 }
