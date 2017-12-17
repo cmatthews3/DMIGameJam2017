@@ -39,8 +39,13 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 heading = new Vector3(moveHorizontal, moveVert, 0).normalized;
 
-        transform.rotation = Quaternion.LookRotation(heading, Vector3.right);
+        
 
         body.velocity = heading * speed;
+
+        if (body.velocity.magnitude > 0.1f)
+        {
+            transform.up = body.velocity.normalized;
+        }
     }
 }
